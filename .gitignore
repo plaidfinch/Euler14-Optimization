@@ -7,3 +7,4 @@ cabal-dev
 .virthualenv
 .DS_Store
 bin/*
+misc/*
