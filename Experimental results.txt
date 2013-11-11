@@ -50,7 +50,7 @@ Timing statistics for different versions:
 100,000,000 (10^8):
 1: 1280.63 s
 2: 484.65 s
-3: [UNKNOWN] Ran 8 minutes, used 10 GB of memory, and slowed the system to a crawl, be I manually terminated it.
+3: [UNKNOWN] Ran 8 minutes, used 10 GB of memory, and slowed the system to a crawl, so I manually terminated it.
 4: 103.50 s
 5: 16.96 s
 6: 4.43 s
