@@ -3,6 +3,8 @@ Euler14-optimization
 
 Progressively optimized versions (in Haskell) of a solution to Problem 14 from Project Euler (<http://projecteuler.net/problem=14>).
 
+Every version takes as its first argument the size of problem to solve, with a default of 1,000,000. This may be specified in floating-point notation, as `1e6`.
+
 Summary of Versions
 -------------------
 
@@ -16,10 +18,13 @@ Summary of Versions
 * `Version4` trades out the purely functional state monad for the `ST` monad, using a mutable array for memoization. Time to solve: 0.52 s.
 * `Version5` eliminates the separate, list-based, maximum-finding step, by using mutable `STRef`s to keep track of the maximum. Time to solve: 0.19 s.
 * `Version6` migrates to the `IO` monad for coordinated parallel computation with global memoization. The `STM` monad prevents thread-synchronization issues in updating the maximum value and in assigning chunks of work to threads. Time to solve: 0.05 s.
+   + Version 6 takes additional command line arguments after the problem size, in this order: chunk size, cache size, number of cores. An underscore (`_`) denotes that the program should substitute the default for that argument.
 
 Compilation Notes
 -----------------
 
-Version 4 needs extra stack space and should be compiled with `-rtsopts -with-rtsopts -K50M` (for default problem size), and possibly with larger sizes than `50M` in case of larger problem sizes.
+For the results I list, all versions were compiled with `-O2` optimizations turned on.
+
+Version 4 needs extra stack space and should be compiled with `-rtsopts -with-rtsopts -K50M` (for default problem size), and possibly with larger sizes than `50M` in case of larger problem sizes (the stack space may also be specified at run-time by appending `+RTS -K<size>` in the shell).
 
 Version 6 is multithreaded and must be compiled as such. Use: `-threaded -rtsopts -with-rtsopts -N8`. For best performance on modern processors with hyperthreading, substitute for `8` the number of cores on your machine multiplied by two.
