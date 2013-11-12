@@ -1,10 +1,10 @@
 module Main ( main ) where
 import Common
-
+import MutableArray
 
 main :: IO ()
 main = print =<< do
-   cores  <- getNumCores =<< getNumCapabilities
+   cores  <- getNumCores
    config <- Config <$> (newEmptyLengths =<< getCacheSize =<< getMaxNumber)
                     <*> getChunkSize <*> getMaxNumber
                     <*> newTVarIO 1  <*> newTVarIO (1,0)

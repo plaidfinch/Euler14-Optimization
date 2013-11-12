@@ -3,53 +3,56 @@ module Common
    ( collatz
    , getFlooredArg , getMaxNumber , getChunkSize , getCacheSize , getNumCores
    , defaultMaxNumber , defaultChunkSize
-   , safeReadArray , safeWriteArray , newEmptyLengths
    , module Data.Ord
-   , module Control.Arrow
    , module Data.List
+   , module Control.Arrow
    , module Control.Applicative
    , module Control.Monad
-   , module Control.Concurrent
-   , module Control.Concurrent.STM
-   , module Data.IORef
-   , module Data.Array.IO
-   , module Data.IntMap
    , module Control.Monad.State
+   , module Data.IntMap
    , module Data.STRef
+   , module Data.Array.ST
    , module Control.Monad.ST
-   , module Data.Array.ST ) where
+   , module Data.IORef
+   , module Control.Concurrent
+   , module Control.Concurrent.STM ) where
 
 import System.Environment
 import Data.Maybe
 
 -- All these are meant to be re-exported...
 import Data.Ord
-import Control.Arrow
 import Data.List
+import Control.Arrow
 import Control.Applicative
 import Control.Monad
+-- Version 3 needs...
+import Control.Monad.State
+import Data.IntMap (IntMap)
+-- Versions 4 & 5 need...
+import Data.STRef
+import Data.Array.ST
+import Control.Monad.ST
+-- Version 6 needs...
+import Data.IORef
 import Control.Concurrent
 import Control.Concurrent.STM
-import Data.IORef
-import Data.Array.IO
-import Data.IntMap (IntMap)
-import Control.Monad.State
-import Data.STRef
-import Control.Monad.ST
-import Data.Array.ST
 
 --------------------------------------------------
 
 -- For all implementations:
 
+-- | The recurrence relation defining the Collatz sequences
 collatz :: Int -> Int
 collatz n =
    if even n
       then n `div` 2
       else 3 * n + 1
 
+-- | The default maximum number; this is the problem size on Project Euler
 defaultMaxNumber = 10^6
 
+-- | Get the nth (zero-indexed) command line argument as an integer, but parse the argument as a float to allow floating-point syntax for specifying large numbers
 getFlooredArg :: Int -> Int -> IO Int
 getFlooredArg n defaultValue =
    maybe defaultValue (floor . read) .
@@ -60,34 +63,16 @@ getFlooredArg n defaultValue =
                       listToMaybe .
                       drop n <$> getArgs
 
+-- | Get the maximum number specified by the user, with a default of... the default
 getMaxNumber = getFlooredArg 0 defaultMaxNumber
-
--- For array-based implementations:
-
-newEmptyLengths :: (Num i, Num e, Ix i, MArray a e m) => i -> m (a i e)
-newEmptyLengths maxNumber =
-   newArray (1,maxNumber) (-1) >>= \a -> writeArray a 1 0 >> return a
-
-insideRange :: Ord a => a -> (a, a) -> Bool
-insideRange i = uncurry (&&) . first (<= i) . second (i <=)
-
-{-# INLINE safeReadArray #-}
-safeReadArray :: (Functor m, Ix i, MArray a e m) => a i e -> i -> m (Maybe e)
-safeReadArray arr i = do
-   safe <- insideRange i <$> getBounds arr
-   if safe then Just <$> readArray arr i
-           else return Nothing
-
-{-# INLINE safeWriteArray #-}
-safeWriteArray :: (Functor m, Ix i, MArray a e m) => a i e -> i -> e -> m ()
-safeWriteArray arr i e = do
-   safe <- insideRange i <$> getBounds arr
-   when safe $ writeArray arr i e
 
 -- For parallel implementation:
 
+-- | The default chunk size
 defaultChunkSize = 10^4
-
+-- | Get the user-specified chunk size (arg 1) with a default of the default
 getChunkSize = getFlooredArg 1 defaultChunkSize
+-- | Get the user-specified cache size (arg 2) -- default must be filled in as the problem size
 getCacheSize = getFlooredArg 2
-getNumCores  = getFlooredArg 3
+-- | Get the user-specified number of cores to use (arg 3) -- default is the number of capabilities given to the runtime
+getNumCores  = getFlooredArg 3 =<< getNumCapabilities

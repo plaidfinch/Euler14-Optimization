@@ -1,6 +1,6 @@
 module Main ( main ) where
 import Common
-
+import MutableArray
 
 main :: IO ()
 main = print =<< maxChain <$> getMaxNumber
