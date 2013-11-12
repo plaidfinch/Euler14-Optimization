@@ -64,3 +64,10 @@ For the results I list, all versions were compiled with `-O2` optimizations turn
 Version 4 needs extra stack space and should be compiled with `-rtsopts -with-rtsopts -K50M` (for default problem size), and possibly with larger sizes than `50M` in case of larger problem sizes (the stack space may also be specified at run-time by appending `+RTS -K<size>` in the shell).
 
 Version 6 is multithreaded and must be compiled as such. Use: `-threaded -rtsopts -with-rtsopts -N8`. For best performance on modern processors with hyperthreading, substitute for `8` the number of cores on your machine multiplied by two.
+
+More Results
+------------
+
+I plotted the cumulative maxima of all Collatz sequences explored during a 1-billion size run with Version 6. This is shown below:
+
+![Cumulative maxima of Collatz sequence](lengths chart.png "Collatz sequence cumulative maxima")
