@@ -3,7 +3,9 @@ Euler14-optimization
 
 Progressively optimized versions (in Haskell) of a solution to Problem 14 from Project Euler (<http://projecteuler.net/problem=14>).
 
-Every version takes as its first argument the size of problem to solve, with a default of 1,000,000. This may be specified in floating-point notation, as `1e6`.
+The source files are formatted such that one can flip quickly back and forth between them to see changes, as similar code is visually aligned between files.
+
+Every version takes as its first argument the size of problem to solve, with a default of 1,000,000. This may be specified in floating-point notation, like `1e6`.
 
 Summary of Versions
 -------------------
