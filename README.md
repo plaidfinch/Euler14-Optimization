@@ -1,5 +1,5 @@
-Euler14-optimization
-====================
+Optimizing a Solution to Project Euler #14 in Haskell
+=====================================================
 
 Progressively optimized versions (in Haskell) of a solution to Problem 14 from Project Euler (<http://projecteuler.net/problem=14>):
 
