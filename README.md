@@ -19,7 +19,17 @@ Progressively optimized versions (in Haskell) of a solution to Problem 14 from P
 
 > NOTE: Once the chain starts the terms are allowed to go above one million.
 
-Starting with a very simple, naïve, declarative solution which runs in about 10 seconds on my machine, I demonstrate a series of optimized versions, each building on the last, the final of which was able to solve the problem in about 0.05 seconds. The process shows a few neat things about Haskell:
+Starting with a very simple, naïve, declarative solution which runs in about 10 seconds on my machine, I demonstrate a series of optimized versions, each building on the last, the final of which was able to solve the problem in about 0.05 seconds.
+
+Here's a linear plot of the performance improvements:
+
+![Linear plot of performance](perfchart linear.png "Time to Finish vs. Problem Size (linear scale)")
+
+And more sanely presented as a log-log plot:
+
+![Log-log plot of performance](perfchart log-log.png "Time to Finish vs. Problem Size (log-log scale)")
+
+This process of improvement shows a few neat things about Haskell:
 
 * The simplest possible solution is very simple, and easy to understand, yet still runs in a decent amount of time.
 * The monad abstraction facilitates lots of code reuse, especially when altering purely functional code to use mutation for speed.
