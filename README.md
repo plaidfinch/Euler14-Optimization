@@ -1,7 +1,21 @@
 Euler14-optimization
 ====================
 
-Progressively optimized versions (in Haskell) of a solution to Problem 14 from Project Euler.
+Progressively optimized versions (in Haskell) of a solution to Problem 14 from Project Euler (<http://projecteuler.net/problem=14>).
+
+Summary of Versions
+-------------------
+
+* `Common` contains code common to some or all versions. It imports every other module used by the various versions, and re-exports them. It also defines:
+   + the recurrence relation for the Collatz sequence
+   + IO accessors to get positional command line arguments
+   + safe array manipulation functions used by array-based implementations (versions 4-6)
+* `Version1` is a naïve, declarative implementation based upon the problem definition. It generates every sequence up to the maximum starting number, and finds the maximum-length sequence. Time to solve: 8.76 s.
+* `Version2` eliminates the generation of a list for each sequence, instead defining a `collatzLength` function which finds the length of a sequence directly. Time to solve: 3.60 s.
+* `Version3` introduces purely functional memoization, in the form of a key-value map encapsulated in a state monad. Time to solve: 1.58 s.
+* `Version4` trades out the purely functional state monad for the `ST` monad, using a mutable array for memoization. Time to solve: 0.52 s.
+* `Version5` eliminates the separate, list-based, maximum-finding step, by using mutable `STRef`s to keep track of the maximum. Time to solve: 0.19 s.
+* `Version6` migrates to the `IO` monad for coordinated parallel computation with global memoization. The `STM` monad prevents thread-synchronization issues in updating the maximum value and in assigning chunks of work to threads. Time to solve: 0.05 s.
 
 Compilation Notes
 -----------------
