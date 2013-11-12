@@ -1,7 +1,23 @@
 Euler14-optimization
 ====================
 
-Progressively optimized versions (in Haskell) of a solution to Problem 14 from Project Euler (<http://projecteuler.net/problem=14>).
+Progressively optimized versions (in Haskell) of a solution to Problem 14 from Project Euler (<http://projecteuler.net/problem=14>):
+
+> The following iterative sequence is defined for the set of positive integers:
+
+> n → n/2 (n is even)
+> n → 3n + 1 (n is odd)
+
+> Using the rule above and starting with 13, we generate the following sequence:
+
+> 13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1
+> It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
+
+> Which starting number, under one million, produces the longest chain?
+
+> NOTE: Once the chain starts the terms are allowed to go above one million.
+
+Starting with a very simple, naïve, declarative solution which runs in about 10 seconds on my machine, I demonstrate a series of optimized versions, each building on the last, the final of which was able to solve the problem in about 0.05 seconds.
 
 The source files are formatted such that one can flip quickly back and forth between them to see changes, as similar code is visually aligned between files.
 
