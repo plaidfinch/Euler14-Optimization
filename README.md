@@ -29,7 +29,7 @@ This process of improvement shows a few neat things about Haskell:
 
 ...plus a few other things which are unique to particular implementations.
 
-The source files are formatted such that one can flip quickly back and forth between them to see changes, as similar code is visually aligned between files.
+The source files are formatted such that one can flip quickly back and forth between them to see changes, as similar code is visually aligned between files. For this reason, I recommend cloning the repository locally, to allow for quick comparison between files.
 
 Every version takes as its first argument the size of problem to solve, with a default of 1,000,000. This may be specified in floating-point notation, like `Version1 1e6`.
 
