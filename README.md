@@ -21,6 +21,10 @@ Progressively optimized versions (in Haskell) of a solution to Problem 14 from P
 
 Starting with a very simple, naïve, declarative solution which runs in about 10 seconds on my machine, I demonstrate a series of optimized versions, each building on the last, the final of which was able to solve the problem in about 0.05 seconds.
 
+The source files are formatted such that one can flip quickly back and forth between them to see changes, as similar code is visually aligned between files. For this reason, I recommend cloning the repository locally, to allow for quick comparison between files.
+
+Each file is commented to (hopefully) elucidate the reasoning behind the opimizations, as well as their operation. **Questions and comments are welcome!**
+
 This process of improvement shows a few neat things about Haskell:
 
 * The simplest possible solution is very simple, and easy to understand, yet still runs in a decent amount of time.
@@ -29,9 +33,7 @@ This process of improvement shows a few neat things about Haskell:
 
 ...plus a few other things which are unique to particular implementations.
 
-The source files are formatted such that one can flip quickly back and forth between them to see changes, as similar code is visually aligned between files. For this reason, I recommend cloning the repository locally, to allow for quick comparison between files.
-
-Every version takes as its first argument the size of problem to solve, with a default of 1,000,000. This may be specified in floating-point notation, like `Version1 1e6`.
+Every version takes as its first argument the size of problem to solve, with a default of 1,000,000. This may be specified in floating-point notation, like `Version1 1e6`. (Version 6 takes a few other command line options, described below.)
 
 Here's a linear plot of the performance improvements:
 
