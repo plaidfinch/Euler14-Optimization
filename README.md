@@ -43,6 +43,8 @@ And more sanely presented as a log-log plot:
 
 ![Log-log plot of performance](perfchart log-log.png "Time to Finish vs. Problem Size (log-log scale)")
 
+All tests were performed using a 2.0 GHz Intel Core i7 processor and 16 GB of installed RAM, on Mac OS X 10.9.
+
 Summary of Versions
 -------------------
 
@@ -61,7 +63,7 @@ Summary of Versions
 Compilation Notes
 -----------------
 
-For the results I list, all versions were compiled with `-O2` optimizations turned on.
+For the results I list, all versions were compiled with `-O2` optimizations turned on, using GHC version 7.6.3 on OS X Mavericks.
 
 Version 4 needs extra stack space and should be compiled with `-rtsopts -with-rtsopts -K50M` (for default problem size), and possibly with larger sizes than `50M` in case of larger problem sizes (the stack space may also be specified at run-time by appending `+RTS -K<size>` in the shell).
 
