@@ -12,6 +12,6 @@ main = print =<< maxChain <$> getMaxNumber
 
 
 maxChain :: Int -> (Int,Int)
-maxChain maxNumber = (head &&& length) . -- get the first element and length of ...
-   maximumBy (comparing length) $        -- ...the maximal-length list in...
-      map (takeWhile (/= 1) . iterate collatz) [1 .. maxNumber] -- ...all Collatz chains
+maxChain maxNumber = (head &&& length) .                        -- Get the first element & length
+   maximumBy (comparing length) $                               -- of the maximal-length list
+      map (takeWhile (/= 1) . iterate collatz) [1 .. maxNumber] -- in all lists of Collatz chains.

@@ -52,7 +52,8 @@ collatz n =
 -- | The default maximum number; this is the problem size on Project Euler
 defaultMaxNumber = 10^6
 
--- | Get the nth (zero-indexed) command line argument as an integer, but parse the argument as a float to allow floating-point syntax for specifying large numbers
+-- | Get the nth (zero-indexed) command line argument as an integer, but parse the argument as a float
+-- | to allow floating-point syntax for specifying large numbers
 getFlooredArg :: Int -> Int -> IO Int
 getFlooredArg n defaultValue =
    maybe defaultValue (floor . read) .
@@ -74,5 +75,6 @@ defaultChunkSize = 10^4
 getChunkSize = getFlooredArg 1 defaultChunkSize
 -- | Get the user-specified cache size (arg 2) -- default must be filled in as the problem size
 getCacheSize = getFlooredArg 2
--- | Get the user-specified number of cores to use (arg 3) -- default is the number of capabilities given to the runtime
+-- | Get the user-specified number of cores to use (arg 3) -- default is the number of capabilities
+-- | given to the runtime
 getNumCores  = getFlooredArg 3 =<< getNumCapabilities
